@@ -31,6 +31,22 @@ const createCourse = async (req, res) => {
     }
   };
 
+const getCourseById = async (req, res) =>{
+    try {
+        const { id } = req.params;
+        const course = await Course.findByIdAndUpdate (id, req.body);
+        if (!course) {
+            return (resp.status(404).json({message: "Course not found"}));
+        }
+        // we re-retrieve the course and reply with the retrieved version.
+        const updatedCourse = await Course.findById(id);
+        res.status(200).json(updatedCourse);
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message});
+    }
+};
+
 const updateCourse = async (req, res) => {
     try {
         const courses = await Course.find ({});
@@ -62,5 +78,6 @@ module.exports = {
     getCourse,
     createCourse,
     updateCourse,
-    deleteCourse
+    deleteCourse,
+    getCourseById
 };

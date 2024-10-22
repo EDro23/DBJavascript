@@ -4,7 +4,7 @@ const SessionsSubSchema = mongoose.Schema ({
     day: {
         type: Number,
         required: true,
-        defaukt:1
+        default:1
     },
     startTime: {
         type: Number,

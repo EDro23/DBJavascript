@@ -2,13 +2,22 @@
 const Course = require(`./models/schedule.model.js`);
 const courseRoute = require ("./routes/course.route.js");
 
+const Student = require(`./models/student.model.js`);
+const studentRoute = require(`./routes/student.route.js`);
+
 const express = require('express')
 const app = express()
 const port = 3000
 
+const cors = require("cors");
+
+app.use(cors());
+
+
 //2
 app.use(express.json());
 app.use ("/api/courses", courseRoute);
+app.use ("/api/students", studentRoute);
 
 //3
 const mongoose = require('mongoose');
