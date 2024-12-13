@@ -1,37 +1,34 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { addOwner } from "../services/apiService";
 
 const RegisterOwner = () => {
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    address: "",
-  });
+    const [ownerData, setOwnerData] = useState({ name: "", phone: "", address: "" });
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setOwnerData({ ...ownerData, [name]: value });
+    };
 
-  const handleSubmit = () => {
-    // Send the data to your backend
-    console.log("Registering owner:", form);
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await addOwner(ownerData);
+            alert("Owner registered successfully!");
+            setOwnerData({ name: "", phone: "", address: "" }); // Reset form
+        } catch (error) {
+            console.error("Error registering owner:", error);
+        }
+    };
 
-  return (
-    <div>
-      <h1>Register Owner</h1>
-      <form>
-        <input name="name" placeholder="Owner Name" onChange={handleChange} />
-        <input name="phone" placeholder="Phone Number" onChange={handleChange} />
-        <input name="address" placeholder="Address" onChange={handleChange} />
-      </form>
-      <button onClick={handleSubmit}>Register</button>
-      <Link to="/owner-menu">
-        <button>Back to Owner Menu</button>
-      </Link>
-    </div>
-  );
+    return (
+        <form onSubmit={handleSubmit}>
+            <h1>Register Owner</h1>
+            <input name="name" value={ownerData.name} onChange={handleChange} placeholder="Name" required />
+            <input name="phone" value={ownerData.phone} onChange={handleChange} placeholder="Phone" required />
+            <input name="address" value={ownerData.address} onChange={handleChange} placeholder="Address" required />
+            <button type="submit">Register</button>
+        </form>
+    );
 };
 
 export default RegisterOwner;

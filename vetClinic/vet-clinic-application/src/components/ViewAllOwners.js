@@ -1,35 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
+import { getOwners } from "../services/apiService";
 
 const ViewAllOwners = () => {
-  const [owners, setOwners] = useState([]);
+    const [owners, setOwners] = useState([]);
 
-  useEffect(() => {
-    // Fetch all owners from the backend
-    console.log("Fetching all owners...");
-    // Simulate fetching owners
-    setOwners([
-      { name: "John Doe", pets: ["Fluffy", "Spot"] },
-      { name: "Jane Smith", pets: ["Buddy"] },
-    ]);
-  }, []);
+    useEffect(() => {
+        const fetchOwners = async () => {
+            try {
+                const response = await getOwners();
+                setOwners(response.data);
+            } catch (error) {
+                console.error("Error fetching owners:", error);
+            }
+        };
+        fetchOwners();
+    }, []);
 
-  return (
-    <div>
-      <h1>All Owners</h1>
-      <ul>
-        {owners.map((owner, index) => (
-          <li key={index}>
-            {owner.name} - Pets: {owner.pets.join(", ")}
-          </li>
-        ))}
-      </ul>
-      <Link to="/owner-menu">
-        <button>Back to Owner Menu</button>
-      </Link>
-    </div>
-  );
+    return (
+        <div>
+            <h1>All Owners</h1>
+            <ul>
+                {owners.map((owner) => (
+                    <li key={owner._id}>
+                        {owner.name} - {owner.phone} - {owner.address}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 };
 
 export default ViewAllOwners;
