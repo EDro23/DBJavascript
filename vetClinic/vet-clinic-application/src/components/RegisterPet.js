@@ -1,34 +1,88 @@
 import React, { useState } from "react";
-import { addPet } from "../services/apiService";
+import { Container, Card, CardContent, Typography, TextField, Button, Box } from "@mui/material";
+import dogImage from "../assets/registerpet.png"; // Replace with your image
 
 const RegisterPet = () => {
-    const [petData, setPetData] = useState({ name: "", type: "", age: "" });
+  const [pet, setPet] = useState({
+    name: "",
+    breed: "",
+    age: "",
+    ownerName: "",
+  });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setPetData({ ...petData, [name]: value });
-    };
+  const handleChange = (e) => {
+    setPet({ ...pet, [e.target.name]: e.target.value });
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await addPet(petData);
-            alert("Pet registered successfully!");
-            setPetData({ name: "", type: "", age: "" }); // Reset form
-        } catch (error) {
-            console.error("Error registering pet:", error);
-        }
-    };
+  const handleSubmit = () => {
+    console.log("Registering Pet:", pet);
+    // Perform the backend API call to register a pet here
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <h1>Register Pet</h1>
-            <input name="name" value={petData.name} onChange={handleChange} placeholder="Name" required />
-            <input name="type" value={petData.type} onChange={handleChange} placeholder="Type (e.g., Dog, Cat)" required />
-            <input name="age" value={petData.age} onChange={handleChange} placeholder="Age" required />
-            <button type="submit">Register</button>
-        </form>
-    );
+  return (
+    <Container maxWidth="sm" sx={{ marginTop: 5 }}>
+      <Card elevation={3}>
+        <CardContent>
+          {/* Header */}
+          <Typography variant="h4" align="center" gutterBottom>
+            Register Pet
+          </Typography>
+
+          {/* Form Fields */}
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 2 }}>
+            <TextField
+              label="Pet Name"
+              name="name"
+              variant="outlined"
+              fullWidth
+              value={pet.name}
+              onChange={handleChange}
+            />
+            <TextField
+              label="Breed"
+              name="breed"
+              variant="outlined"
+              fullWidth
+              value={pet.breed}
+              onChange={handleChange}
+            />
+            <TextField
+              label="Age"
+              name="age"
+              variant="outlined"
+              fullWidth
+              value={pet.age}
+              onChange={handleChange}
+            />
+            <TextField
+              label="Owner Name"
+              name="ownerName"
+              variant="outlined"
+              fullWidth
+              value={pet.ownerName}
+              onChange={handleChange}
+            />
+          </Box>
+
+          {/* Submit Button */}
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ marginTop: 3 }}
+            onClick={handleSubmit}
+          >
+            Register
+          </Button>
+
+          {/* Image at the Bottom */}
+          <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
+            <img src={dogImage} alt="Dog" style={{ width: "150px", borderRadius: "8px" }} />
+          </Box>
+        </CardContent>
+      </Card>
+    </Container>
+  );
 };
 
 export default RegisterPet;

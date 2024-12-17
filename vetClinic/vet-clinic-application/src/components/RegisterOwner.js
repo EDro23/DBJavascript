@@ -1,34 +1,79 @@
 import React, { useState } from "react";
-import { addOwner } from "../services/apiService";
+import { Container, Card, CardContent, Typography, TextField, Button, Box } from "@mui/material";
+import catImage from "../assets/registerpet.png"; // Replace with your image
 
 const RegisterOwner = () => {
-    const [ownerData, setOwnerData] = useState({ name: "", phone: "", address: "" });
+  const [owner, setOwner] = useState({
+    name: "",
+    phone: "",
+    address: "",
+  });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setOwnerData({ ...ownerData, [name]: value });
-    };
+  const handleChange = (e) => {
+    setOwner({ ...owner, [e.target.name]: e.target.value });
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await addOwner(ownerData);
-            alert("Owner registered successfully!");
-            setOwnerData({ name: "", phone: "", address: "" }); // Reset form
-        } catch (error) {
-            console.error("Error registering owner:", error);
-        }
-    };
+  const handleSubmit = () => {
+    console.log("Registering Owner:", owner);
+    // Perform the backend API call to register an owner here
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <h1>Register Owner</h1>
-            <input name="name" value={ownerData.name} onChange={handleChange} placeholder="Name" required />
-            <input name="phone" value={ownerData.phone} onChange={handleChange} placeholder="Phone" required />
-            <input name="address" value={ownerData.address} onChange={handleChange} placeholder="Address" required />
-            <button type="submit">Register</button>
-        </form>
-    );
+  return (
+    <Container maxWidth="sm" sx={{ marginTop: 5 }}>
+      <Card elevation={3}>
+        <CardContent>
+          {/* Header */}
+          <Typography variant="h4" align="center" gutterBottom>
+            Register Owner
+          </Typography>
+
+          {/* Form Fields */}
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 2 }}>
+            <TextField
+              label="Owner Name"
+              name="name"
+              variant="outlined"
+              fullWidth
+              value={owner.name}
+              onChange={handleChange}
+            />
+            <TextField
+              label="Phone Number"
+              name="phone"
+              variant="outlined"
+              fullWidth
+              value={owner.phone}
+              onChange={handleChange}
+            />
+            <TextField
+              label="Address"
+              name="address"
+              variant="outlined"
+              fullWidth
+              value={owner.address}
+              onChange={handleChange}
+            />
+          </Box>
+
+          {/* Submit Button */}
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ marginTop: 3 }}
+            onClick={handleSubmit}
+          >
+            Register
+          </Button>
+
+          {/* Image at the Bottom */}
+          <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
+            <img src={catImage} alt="Cat" style={{ width: "150px", borderRadius: "8px" }} />
+          </Box>
+        </CardContent>
+      </Card>
+    </Container>
+  );
 };
 
 export default RegisterOwner;

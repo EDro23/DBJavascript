@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# Vet Clinic Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a full-stack web application designed to manage pets and owners in a veterinary clinic. It includes a **React frontend** and an **Express backend** connected to a MongoDB database.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Project Overview**
+- **Backend**: Handles API requests and interacts with the MongoDB database.
+- **Frontend**: Provides a user interface built with React and Material-UI for managing pets and owners.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Prerequisites**
+Before running the project, ensure the following are installed:
+1. **Node.js** and **npm**: Download from [https://nodejs.org](https://nodejs.org).
+2. **MongoDB**: Ensure MongoDB is set up locally or provide a remote MongoDB connection URL.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **Step-by-Step Instructions**
 
-### `npm run build`
+### **1. Backend Setup**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Open a terminal and navigate to the backend folder:
+cd vetClinic
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install backend dependencies:
+npm install
+### **Backend Dependencies**:
+- `express`: Web framework for handling API requests.
+- `mongoose`: MongoDB ODM for handling database operations.
+- `cors`: Middleware to handle cross-origin requests.
+- `nodemon`: Automatically restarts the backend server during development.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Start the backend server using `nodemon`:
+npx nodemon index.js
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- The backend server will start at **`http://localhost:3001`**.
 
-## Learn More
+4. Verify the backend:
+- Test a sample endpoint in your browser or Postman:
+  ```
+  http://localhost:3001/api/pets
+  ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **2. Frontend Setup**
 
-### Code Splitting
+1. Open a new terminal and navigate to the frontend folder:
+cd vet-clinic-application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+2. Install frontend dependencies:
+npm install
+### **Frontend Dependencies**:
+- `react`, `react-dom`: Core React libraries.
+- `react-router-dom`: For handling routing between pages.
+- `axios`: For making API requests to the backend.
+- `@mui/material` and `@mui/icons-material`: Material-UI components for styling.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+3. Start the React frontend:
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- The frontend will open in your browser at **`http://localhost:3000`**.
 
-### Advanced Configuration
+4. Verify the frontend:
+- Ensure the backend is running at `http://localhost:3001`.
+- Test features like "Register Pet" and "Find Owner" to confirm everything works.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## **4. Database Configuration**
+The backend connects to a MongoDB database. If you are using a `.env` file, ensure it includes:
+MONGODB_URI=mongodb://your-database-url PORT=3001 (Logan Database MongoURI)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## **5. Troubleshooting**
+
+### Backend Issues:
+- **Server doesn't start**: Ensure `nodemon` is installed and `index.js` exists in the backend folder.
+- **Database connection fails**: Check the `MONGODB_URI` in the `.env` file.
+
+### Frontend Issues:
+- **React app fails to start**: Ensure dependencies are installed:
+npm install
+
+- **API calls fail**: Confirm the backend is running and accessible at `http://localhost:3001`.
+
+### CORS Errors:
+- Verify that the backend allows cross-origin requests (CORS).
+
+---
+
+## **Author**
+- **Ethan Drover**
+
+---
+
+## **Notes**
+1. Make sure the backend is running **before** starting the frontend.
+2. Default ports:
+- **Backend**: `http://localhost:3001`
+- **Frontend**: `http://localhost:3000`
+
+---
+
+## **Thank You for Testing the Vet Clinic Management System!**
